@@ -1,0 +1,332 @@
+import React, { useState } from 'react';
+import { Menu, X, Mail, Linkedin, Github, ExternalLink, Briefcase, Award, GraduationCap } from 'lucide-react';
+
+export default function Portfolio() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  const projects = [
+    {
+      title: "Product Launch Campaign",
+      company: "Tech Corp",
+      description: "Led go-to-market strategy for B2B SaaS product, achieving 150% of launch targets and 2,000+ qualified leads in first quarter.",
+      metrics: ["150% of target", "2,000+ leads", "40% conversion rate"],
+      tags: ["GTM Strategy", "Content Marketing", "Lead Gen"]
+    },
+    {
+      title: "Brand Repositioning",
+      company: "Innovation Labs",
+      description: "Drove complete brand refresh and messaging framework, resulting in 65% increase in brand awareness and 45% boost in organic traffic.",
+      metrics: ["65% brand lift", "45% traffic growth", "3x social engagement"],
+      tags: ["Brand Strategy", "Messaging", "Analytics"]
+    },
+    {
+      title: "Customer Marketing Program",
+      company: "Growth Solutions",
+      description: "Built customer advocacy program from scratch, generating 50+ case studies and improving retention rate by 28%.",
+      metrics: ["50+ case studies", "28% retention lift", "90 NPS score"],
+      tags: ["Customer Marketing", "Content Strategy", "Retention"]
+    }
+  ];
+
+  const experience = [
+    {
+      role: "Senior Product Marketing Manager",
+      company: "Tech Corp",
+      period: "2022 - Present",
+      achievements: [
+        "Led GTM strategy for 3 major product launches",
+        "Grew pipeline by 200% through strategic campaigns",
+        "Built competitive intelligence framework"
+      ]
+    },
+    {
+      role: "Product Marketing Manager",
+      company: "Innovation Labs",
+      period: "2020 - 2022",
+      achievements: [
+        "Managed $500K marketing budget",
+        "Increased product adoption by 85%",
+        "Created sales enablement materials used by 50+ reps"
+      ]
+    },
+    {
+      role: "Marketing Associate",
+      company: "Growth Solutions",
+      period: "2018 - 2020",
+      achievements: [
+        "Supported 10+ product launches",
+        "Developed content strategy reaching 100K+ users",
+        "Optimized conversion funnel improving CVR by 35%"
+      ]
+    }
+  ];
+
+  const skills = [
+    "Go-to-Market Strategy",
+    "Product Positioning",
+    "Competitive Analysis",
+    "Content Marketing",
+    "Marketing Analytics",
+    "Customer Research",
+    "Sales Enablement",
+    "Campaign Management",
+    "Brand Strategy",
+    "Product Launches",
+    "B2B Marketing",
+    "Growth Marketing"
+  ];
+
+  const scrollToSection = (sectionId) => {
+    setActiveSection(sectionId);
+    setIsMenuOpen(false);
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Your Name
+            </h1>
+            
+            {/* Desktop Menu */}
+            <div className="hidden md:flex gap-8">
+              {['home', 'about', 'experience', 'projects', 'contact'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className={`capitalize transition-colors ${
+                    activeSection === section
+                      ? 'text-blue-600 font-semibold'
+                      : 'text-slate-600 hover:text-blue-600'
+                  }`}
+                >
+                  {section}
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 flex flex-col gap-4">
+              {['home', 'about', 'experience', 'projects', 'contact'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className="capitalize text-left text-slate-600 hover:text-blue-600"
+                >
+                  {section}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="pt-32 pb-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center">
+            <div className="inline-block mb-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+              Product Marketing Professional
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+              Driving Growth Through
+              <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Strategic Marketing
+              </span>
+            </h2>
+            <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+              Product marketer passionate about creating compelling go-to-market strategies, 
+              positioning products for success, and driving measurable business impact.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                View Projects
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="px-8 py-3 border-2 border-slate-300 text-slate-700 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors"
+              >
+                Get in Touch
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">About Me</h3>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                Results-driven product marketer with 5+ years of experience developing and executing 
+                go-to-market strategies for B2B SaaS products. Proven track record of driving product 
+                adoption, revenue growth, and market positioning.
+              </p>
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                I specialize in translating complex product features into compelling value propositions 
+                that resonate with target audiences. My approach combines data-driven insights with 
+                creative storytelling to build campaigns that convert.
+              </p>
+              <div className="flex gap-4">
+                <a href="mailto:your.email@example.com" className="p-3 bg-slate-100 rounded-lg hover:bg-blue-100 transition-colors">
+                  <Mail size={20} className="text-slate-700" />
+                </a>
+                <a href="https://linkedin.com" className="p-3 bg-slate-100 rounded-lg hover:bg-blue-100 transition-colors">
+                  <Linkedin size={20} className="text-slate-700" />
+                </a>
+                <a href="https://github.com" className="p-3 bg-slate-100 rounded-lg hover:bg-blue-100 transition-colors">
+                  <Github size={20} className="text-slate-700" />
+                </a>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <Award className="text-blue-600" size={24} />
+                Core Skills
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">Experience</h3>
+          <div className="space-y-8">
+            {experience.map((job, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 bg-blue-100 rounded-lg">
+                    <Briefcase className="text-blue-600" size={24} />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold text-slate-900">{job.role}</h4>
+                    <p className="text-blue-600 font-semibold">{job.company}</p>
+                    <p className="text-slate-500 text-sm">{job.period}</p>
+                  </div>
+                </div>
+                <ul className="space-y-2 ml-16">
+                  {job.achievements.map((achievement, idx) => (
+                    <li key={idx} className="text-slate-600 flex items-start gap-2">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">Featured Projects</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-lg transition-all hover:-translate-y-1"
+              >
+                <h4 className="text-xl font-bold text-slate-900 mb-2">{project.title}</h4>
+                <p className="text-blue-600 font-semibold text-sm mb-4">{project.company}</p>
+                <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
+                
+                <div className="mb-4 space-y-2">
+                  {project.metrics.map((metric, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                      <span className="text-sm font-semibold text-slate-700">{metric}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 bg-white text-slate-600 rounded-full text-xs font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl font-bold text-slate-900 mb-6">Let's Connect</h3>
+          <p className="text-xl text-slate-600 mb-8">
+            Interested in collaborating or want to learn more about my work? 
+            I'd love to hear from you.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:your.email@example.com"
+              className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2"
+            >
+              <Mail size={20} />
+              Email Me
+            </a>
+            <a
+              href="https://linkedin.com"
+              className="px-8 py-3 border-2 border-slate-300 text-slate-700 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors inline-flex items-center justify-center gap-2"
+            >
+              <Linkedin size={20} />
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-white py-8 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-slate-400">
+            © 2024 Your Name. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
